@@ -12,9 +12,11 @@ search.addEventListener('click', () =>{
     if(city === '')
         return;
 
-    fetch(`api.openweathermap.org/data/2.5/weather?${city}&APPID=${APIKey}`).then(response => response.json()).then(json => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`)
+        .then(response => response.json())
+        .then(json => {
         
-        if(json.cod === '404'){
+        if(json.cod === '404') {
             container.style.height = '400px';
             weatherBox.style.display = 'none';
             weatherDetails.style.display = 'none';
@@ -27,9 +29,9 @@ search.addEventListener('click', () =>{
         error404.classList.remove('fadeIn');
 
         const image = document.querySelector('.weather-box img');
-        const temperature = document.querySelector('.weather-box .temporature');
+        const temperature = document.querySelector('.weather-box .temperature');
         const description = document.querySelector('.weather-box .description');
-        const humidity = document.querySelector('.weather-details .humidty span');
+        const humidity = document.querySelector('.weather-details .humidity span');
         const wind = document.querySelector('.weather-details .wind span');
         
         switch (json.weather[0].main) {
@@ -50,7 +52,7 @@ search.addEventListener('click', () =>{
                 break;
 
             case 'Haze':
-                image.src = 'images/haze.png';
+                image.src = 'images/mist.png';
                 break;
 
             default:
