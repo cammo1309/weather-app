@@ -1,3 +1,6 @@
+const apiGatewayEndpoint = 'https://6fseybwiwzievf5tdsztfxrdbi0vfdse.lambda-url.eu-west-2.on.aws/';
+
+
 const container = document.querySelector('.container');
 const search = document.querySelector('.search-box button');
 const weatherBox = document.querySelector('.weather-box');
@@ -6,13 +9,12 @@ const error404 = document.querySelector('.not-found');
 
 search.addEventListener('click', () =>{
 
-    const APIKey = '3ae729564d1f35d9ad97c50e6d006243';
     const city = document.querySelector('.search-box input').value;
 
     if(city === '')
         return;
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`)
+    fetch(`${apiGatewayEndpoint}?city=${city}`)
         .then(response => response.json())
         .then(json => {
         
