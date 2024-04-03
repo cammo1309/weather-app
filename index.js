@@ -1,6 +1,5 @@
 const apiGatewayEndpoint = 'https://6fseybwiwzievf5tdsztfxrdbi0vfdse.lambda-url.eu-west-2.on.aws/';
 
-
 const container = document.querySelector('.container');
 const search = document.querySelector('.search-box button');
 const weatherBox = document.querySelector('.weather-box');
@@ -53,7 +52,7 @@ search.addEventListener('click', () =>{
                 image.src = 'images/clouds.png';
                 break;
 
-            case 'Haze':
+            case 'Mist':
                 image.src = 'images/mist.png';
                 break;
 
