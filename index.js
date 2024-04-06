@@ -6,70 +6,53 @@ const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
 const error404 = document.querySelector('.not-found');
 
-search.addEventListener('click', () =>{
-
+search.addEventListener('click', () => {
     const city = document.querySelector('.search-box input').value;
 
-    if(city === '')
-        return;
+    if (city === '') return;
 
     fetch(`${apiGatewayEndpoint}?city=${city}`)
         .then(response => response.json())
-        .then(json => {
-        
-        if(json.cod === '404') {
-            container.style.height = '400px';
-            weatherBox.style.display = 'none';
-            weatherDetails.style.display = 'none';
-            error404.style.display = 'block';
-            error404.classList.add('fadeIn');
-            return;
-        }
+        .then(data => { // 'json' changed to 'data' for clarity, not necessary
+            
+            if (data.error || data.statusCode === 404) {
+                container.style.height = '400px';
+                weatherBox.style.display = 'none';
+                weatherDetails.style.display = 'none';
+                error404.style.display = 'block';
+                error404.classList.add('fadeIn');
+                return;
+            }
 
-        error404.style.display = 'none';
-        error404.classList.remove('fadeIn');
+            error404.style.display = 'none';
+            error404.classList.remove('fadeIn');
 
-        const image = document.querySelector('.weather-box img');
-        const temperature = document.querySelector('.weather-box .temperature');
-        const description = document.querySelector('.weather-box .description');
-        const humidity = document.querySelector('.weather-details .humidity span');
-        const wind = document.querySelector('.weather-details .wind span');
-        
-        switch (json.weather[0].main) {
-            case 'Clear':
-                image.src = 'images/clear.png';
-                break;
+            // Directly using the data from the custom response    
+            const iconImg = document.querySelector('.weather-box img');
+            iconImg.src = data.iconUrl;
+            
+            const temperature = document.querySelector('.weather-box .temperature');
+            temperature.innerHTML = `${data.temperature}`;
 
-            case 'Rain':
-                image.src = 'images/rain.png';
-                break;
+            const description = document.querySelector('.weather-box .description');
+            description.innerHTML = data.description;
 
-            case 'Snow':
-                image.src = 'images/snow.png';
-                break;
+            const humidity = document.querySelector('.weather-details .humidity span');
+            humidity.innerHTML = `${data.humidity}`;
 
-            case 'Clouds':
-                image.src = 'images/clouds.png';
-                break;
+            const wind = document.querySelector('.weather-details .wind span');
+            wind.innerHTML = `${data.windSpeed}`;
 
-            case 'Mist':
-                image.src = 'images/mist.png';
-                break;
+            const feelsLike = document.querySelector('.weather-details .feels-like-value');
+            feelsLike.innerHTML = `${data.feels_like}`;
 
-            default:
-                image.src = '';
-        }
-
-        temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
-        description.innerHTML = `${json.weather[0].description}`;
-        humidity.innerHTML = `${json.main.humidity}%`;
-        wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
-
-        weatherBox.style.display = '';
-        weatherDetails.style.display = '';
-        weatherBox.classList.add('fadeIn');
-        weatherDetails.classList.add('fadeIn');
-        container.style.height = '590px';
-
-    })
-})
+            weatherBox.style.display = '';
+            weatherDetails.style.display = '';
+            weatherBox.classList.add('fadeIn');
+            weatherDetails.classList.add('fadeIn');
+            container.style.height = '590px';
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+        });
+});

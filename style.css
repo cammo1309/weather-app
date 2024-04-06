@@ -16,14 +16,14 @@ body{
 
 .container{
     position: relative;
-    width: 400px;
     height: 105px;
+    width: 400px;
     background: #fff;
     padding: 28px 32px;
     overflow: hidden;
     border-radius: 18px;
     font-family: 'Roboto', sans-serif;
-    transition: 0.6s ease-out;
+    transition: 0.6s ease-out; /* Height transition adjusted dynamically in JS */
 }
 
 .search-box{
@@ -76,6 +76,14 @@ body{
     text-align: center;
 }
 
+.weather-box .location {
+    color: #194653;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-top: 20px;
+}
+
 .weather-box img{
     width: 60%;
     margin-top: 30px;
@@ -83,7 +91,7 @@ body{
 
 .weather-box .temperature{
     position: relative;
-    color: #194653;
+    color: darkcyan;
     font-size: 4rem;
     font-weight: 800;
     margin-top: 30px;
@@ -94,6 +102,13 @@ body{
     position: absolute;
     margin-left: 4px;
     font-size: 1.5rem;
+}
+
+.weather-box .condition {
+    color: #194653;
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 10px;
 }
 
 .weather-box .description{
@@ -110,20 +125,21 @@ body{
     margin-top: 30px;
 }
 
-.weather-details .humidity, .weather-details .wind{
+.weather-details .detail, .weather-details .humidity, .weather-details .wind{
     display: flex;
     align-items: center;
     width: 50%;
     height: 100px;
+    padding-bottom: 10px;
 }
 
-.weather-details .humidity{
+.weather-details .detail .feels-like, .weather-details .humidity{
     padding-left: 20px;
     justify-content: flex-start;
 }
 
 .weather-details .wind{
-    padding-right: 20px;
+    padding-left: 10px;
     justify-content: flex-end;
 }
 
@@ -134,8 +150,8 @@ body{
     margin-top: 6px;
 }
 
-.weather-details span{
-    color: #194653;
+.weather-details .detail .feels-like-value, .weather-details span{
+    color: darkcyan;
     font-size: 22px;
     font-weight: 500;
 }
