@@ -19,28 +19,37 @@
         </div>
 
         <div class="not-found">
-            <img src="images/404.png">
+            <img src="images/404.png" alt="Location not found">
             <p>Oops! Invalid location :/</p>
         </div>
 
         <div class="weather-box">
-            <img src="">
+            <h2 class="location"></h2> <!-- Added for displaying the location -->
+            <img src="" alt="Weather icon"> <!-- Added alt text for accessibility -->
             <p class="temperature"></p>
+            <p class="condition"></p> <!-- Added for displaying the main condition -->
             <p class="description"></p>
         </div>
 
         <div class="weather-details">
-            <div class="humidity">
+            <div class="detail feels-like">
+                <i class="fa-solid fa-temperature-high"></i>
+                <div class="text">
+                    <span class="feels-like-value"></span>
+                    <p>Feels Like</p>
+                </div>
+            </div>
+            <div class="detail humidity">
                 <i class="fa-solid fa-water"></i>
                 <div class="text">
-                    <span></span>
+                    <span class="humidity-value"></span>
                     <p>Humidity</p>
                 </div>
             </div>
-            <div class="wind">
+            <div class="detail wind">
                 <i class="fa-solid fa-wind"></i>
                 <div class="text">
-                    <span></span>
+                    <span class="wind-speed"></span>
                     <p>Wind Speed</p>
                 </div>
             </div>
@@ -49,5 +58,4 @@
     <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
-
 </html>
