@@ -22,4 +22,4 @@ jobs:
 
     - name: Deploy to S3
       run: |
-        aws s3 sync ./weather-app s3://cammo1309-weather-app1 --delete 
+        aws s3 sync ./ s3://cammo1309-weather-app1 --delete 
